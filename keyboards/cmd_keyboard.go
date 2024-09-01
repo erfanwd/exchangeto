@@ -5,16 +5,13 @@ import (
 )
 
 func CmdKeyboard() tgbotapi.ReplyKeyboardMarkup {
-	var cmdKeyboard = tgbotapi.NewReplyKeyboard(
+	var cmdKeyboard = tgbotapi.NewOneTimeReplyKeyboard(
 		tgbotapi.NewKeyboardButtonRow(
-			tgbotapi.NewKeyboardButton("/set_todo"),
-		),
-		tgbotapi.NewKeyboardButtonRow(
-			tgbotapi.NewKeyboardButton("/delete_todo"),
-		),
-		tgbotapi.NewKeyboardButtonRow(
-			tgbotapi.NewKeyboardButton("/show_all_todos"),
+			tgbotapi.NewKeyboardButton("/set_reminder"),
 		),
 	)
 	return cmdKeyboard
 }
+
+
+

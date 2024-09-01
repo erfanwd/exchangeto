@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"fmt"
 	"telegram-todolist/services"
 	"telegram-todolist/utils"
 
@@ -8,9 +9,11 @@ import (
 )
 
 func Callbacks(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
-	cmd, taskId := utils.GetKeyValue(update.CallbackQuery.Data)
+	fmt.Println(update.Message.Chat.ID)
+	cmd, value := utils.GetKeyValue(update.CallbackQuery.Data)
 	switch {
-	case cmd == "delete_task":
-		services.DeleteTaskCallback(bot, update, taskId)
+	case cmd == "selected_exchange":
+	
+		services.SetReminder(bot, update, value)
 	}
 }

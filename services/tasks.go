@@ -11,6 +11,7 @@ import (
 
 func Start(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 	text := "Hi, here you can create todos for your todolist."
+	repositories.CreateUser(update)
 	msg := tgbotapi.NewMessage(update.Message.Chat.ID, text)
 	msg.ReplyMarkup = keyboards.CmdKeyboard()
 	if _, err := bot.Send(msg); err != nil {
