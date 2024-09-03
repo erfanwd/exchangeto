@@ -2,6 +2,7 @@ package services
 
 import (
 	"fmt"
+	"log"
 	"strconv"
 	"telegram-todolist/repositories"
 
@@ -9,7 +10,7 @@ import (
 )
 
 func ExchangeList(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
-	data, _ := repositories.GetAllExchanges(update.Message.Chat.ID)
+	data, _ := repositories.GetAllExchanges()
 	var btns []tgbotapi.InlineKeyboardButton
 	
 	for i := 0; i < len(data); i++ {	
@@ -37,4 +38,27 @@ func ExchangeList(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 	if _, err := bot.Send(msg); err != nil {
 		panic(err)
 	}
+	userStates[update.Message.Chat.ID] = "choosing_crypto"
+}
+
+
+func SetExchange(bot *tgbotapi.BotAPI, update tgbotapi.Update, value string) {
+	// Access the chat ID from the CallbackQuery's message
+	chatID := update.CallbackQuery.Message.Chat.ID
+
+	
+	userSelections[chatID] = map[string]interface{}{
+		"crypto": value,
+	}
+	
+	// Send the response message
+	text := "حالا لطفا اون رقمی که میخوای اگه این ارز بهش رسید برات پیغام بیاد رو بنویس (به دلار)"
+	msg := tgbotapi.NewMessage(chatID, text)
+	
+	if _, err := bot.Send(msg); err != nil {
+		log.Println("Error sending message:", err)
+		panic(err) // Consider handling this more gracefully
+	}
+
+	userStates[chatID] = "choosing_amount"
 }

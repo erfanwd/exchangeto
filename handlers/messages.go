@@ -7,5 +7,9 @@ import (
 )
 
 func Messages(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
-	services.SetTaskCallback(bot, update)
+	state := services.GetState(update.Message.Chat.ID)
+
+	if state == "choosing_amount" {
+		services.SetAmount(bot, update)
+	}
 }

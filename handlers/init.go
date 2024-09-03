@@ -4,6 +4,7 @@ import (
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 )
 
+
 func Init(bot *tgbotapi.BotAPI) {
     u := tgbotapi.NewUpdate(0)
     u.Timeout = 60

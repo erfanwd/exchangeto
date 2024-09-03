@@ -12,3 +12,5 @@ type Reminder struct {
 	Strategy   string    `gorm:"type:varchar(50);column:strategy"` 
 	CreatedAt  time.Time `gorm:"autoCreateTime"`  
 }
+
+

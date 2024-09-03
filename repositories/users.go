@@ -1,6 +1,7 @@
 package repositories
 
 import (
+	"log"
 	"telegram-todolist/models"
 	"time"
 
@@ -23,13 +24,12 @@ func CreateUser(update tgbotapi.Update) (*models.User, error) {
 }
 
 func getUserByChatId(chatId int64) (*models.User, error) {
-	
-    var user models.User
-    result := DB.Where("chat_id = ?", chatId).First(&user)
-    if result.Error != nil {
-        return nil, result.Error
-    }
-	
-    return &user, nil
+	var user models.User
+	result := DB.Where("chat_id = ?", chatId).First(&user)
+	if result.Error != nil {
+		log.Println("Error finding user by chat ID:", result.Error)
+		return nil, result.Error
+	}
+	return &user, nil
 }
 

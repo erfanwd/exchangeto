@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"fmt"
 	"telegram-todolist/services"
 	"telegram-todolist/utils"
 
@@ -9,11 +8,12 @@ import (
 )
 
 func Callbacks(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
-	fmt.Println(update.Message.Chat.ID)
 	cmd, value := utils.GetKeyValue(update.CallbackQuery.Data)
 	switch {
 	case cmd == "selected_exchange":
-	
+		services.SetExchange(bot, update, value)
+	case cmd == "selected_strategy":
 		services.SetReminder(bot, update, value)
 	}
+	
 }
