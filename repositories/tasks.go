@@ -1,7 +1,7 @@
 package repositories
 
 import (
-	"telegram-todolist/models"
+	"github.com/erfanwd/exchangeto/models"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 )

@@ -4,7 +4,8 @@ import (
 	"fmt"
 	"log"
 	"strconv"
-	"telegram-todolist/repositories"
+
+	"github.com/erfanwd/exchangeto/repositories"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 )
@@ -12,8 +13,8 @@ import (
 func ExchangeList(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 	data, _ := repositories.GetAllExchanges()
 	var btns []tgbotapi.InlineKeyboardButton
-	
-	for i := 0; i < len(data); i++ {	
+
+	for i := 0; i < len(data); i++ {
 		btn := tgbotapi.NewInlineKeyboardButtonData(data[i].Name, "selected_exchange="+strconv.FormatUint(uint64(data[i].ID), 10))
 		btns = append(btns, btn)
 	}
@@ -41,20 +42,18 @@ func ExchangeList(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 	userStates[update.Message.Chat.ID] = "choosing_crypto"
 }
 
-
 func SetExchange(bot *tgbotapi.BotAPI, update tgbotapi.Update, value string) {
 	// Access the chat ID from the CallbackQuery's message
 	chatID := update.CallbackQuery.Message.Chat.ID
 
-	
 	userSelections[chatID] = map[string]interface{}{
 		"crypto": value,
 	}
-	
+
 	// Send the response message
 	text := "حالا لطفا اون رقمی که میخوای اگه این ارز بهش رسید برات پیغام بیاد رو بنویس (به دلار)"
 	msg := tgbotapi.NewMessage(chatID, text)
-	
+
 	if _, err := bot.Send(msg); err != nil {
 		log.Println("Error sending message:", err)
 		panic(err) // Consider handling this more gracefully

@@ -1,10 +1,8 @@
 package repositories
 
 import (
-	"telegram-todolist/models"
+	"github.com/erfanwd/exchangeto/models"
 )
-
-
 
 func GetAllExchanges() ([]models.Exchange, error) {
 	var exchanges []models.Exchange
@@ -14,7 +12,7 @@ func GetAllExchanges() ([]models.Exchange, error) {
 	return exchanges, nil
 }
 
-func GetExchangeById(id string) (models.Exchange, error){
+func GetExchangeById(id string) (models.Exchange, error) {
 	var exchange models.Exchange
 	if result := DB.First(&exchange, id); result.Error != nil {
 		return exchange, result.Error

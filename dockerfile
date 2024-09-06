@@ -5,12 +5,12 @@ COPY /. ./
 
 #apk add nano \ && 
 RUN go mod download \
-        && go build -o /telegram-todolist .
+        && go build -o /github.com/erfanwd/exchangeto .
 
 FROM alpine:3.16.2
 WORKDIR /app
-COPY --from=builder telegram-todolist .
+COPY --from=builder github.com/erfanwd/exchangeto .
 COPY .env .
 
 
-CMD ["./telegram-todolist"]
+CMD ["./github.com/erfanwd/exchangeto"]

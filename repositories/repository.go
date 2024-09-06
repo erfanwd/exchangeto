@@ -1,7 +1,7 @@
 package repositories
 
 import (
-	"telegram-todolist/database"
+	"github.com/erfanwd/exchangeto/database"
 
 	"gorm.io/gorm"
 )

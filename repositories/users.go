@@ -2,8 +2,9 @@ package repositories
 
 import (
 	"log"
-	"telegram-todolist/models"
 	"time"
+
+	"github.com/erfanwd/exchangeto/models"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 )
@@ -32,4 +33,3 @@ func getUserByChatId(chatId int64) (*models.User, error) {
 	}
 	return &user, nil
 }
-

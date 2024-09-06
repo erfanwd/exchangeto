@@ -3,8 +3,8 @@ package services
 import (
 	"fmt"
 
-	"telegram-todolist/keyboards"
-	"telegram-todolist/repositories"
+	"github.com/erfanwd/exchangeto/keyboards"
+	"github.com/erfanwd/exchangeto/repositories"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 )

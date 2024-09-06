@@ -3,8 +3,9 @@ package database
 import (
 	"fmt"
 	"log"
-	"telegram-todolist/config"
-	"telegram-todolist/models"
+
+	"github.com/erfanwd/exchangeto/config"
+	"github.com/erfanwd/exchangeto/models"
 
 	_ "github.com/lib/pq"
 	"gorm.io/driver/postgres"

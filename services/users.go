@@ -1,8 +1,8 @@
 package services
 
 import (
-	"telegram-todolist/keyboards"
-	"telegram-todolist/repositories"
+	"github.com/erfanwd/exchangeto/keyboards"
+	"github.com/erfanwd/exchangeto/repositories"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 )
@@ -11,7 +11,7 @@ var userStates = make(map[int64]string)
 var userSelections = make(map[int64]map[string]interface{})
 
 func StartChat(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
-	user,_ := repositories.CreateUser(update)
+	user, _ := repositories.CreateUser(update)
 	userStates[update.Message.Chat.ID] = "user_started"
 	text := " سلام" + user.FirstName + " از گزینه های پایین یکی رو انتخاب کن :)"
 	msg := tgbotapi.NewMessage(update.Message.Chat.ID, text)
@@ -21,11 +21,10 @@ func StartChat(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 	}
 }
 
-func GetState(chat_id int64) string{
+func GetState(chat_id int64) string {
 	return userStates[chat_id]
 }
 
-func GetStateSelections(chat_id int64) map[string]interface{}{
+func GetStateSelections(chat_id int64) map[string]interface{} {
 	return userSelections[chat_id]
 }
-

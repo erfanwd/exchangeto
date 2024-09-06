@@ -1,8 +1,8 @@
 package handlers
 
 import (
-	"telegram-todolist/services"
-	"telegram-todolist/utils"
+	"github.com/erfanwd/exchangeto/services"
+	"github.com/erfanwd/exchangeto/utils"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 )
@@ -15,5 +15,5 @@ func Callbacks(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 	case cmd == "selected_strategy":
 		services.SetReminder(bot, update, value)
 	}
-	
+
 }

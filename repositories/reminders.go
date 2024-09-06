@@ -3,9 +3,9 @@ package repositories
 import (
 	"log"
 	"strconv"
-	"telegram-todolist/models"
-)
 
+	"github.com/erfanwd/exchangeto/models"
+)
 
 func CreateReminder(chat_id int64, userSelections map[string]interface{}) (*models.Reminder, error) {
 	// Get the user by chat ID
@@ -47,15 +47,13 @@ func CreateReminder(chat_id int64, userSelections map[string]interface{}) (*mode
 }
 
 func GetAllReminders() ([]models.Reminder, error) {
-    var reminders []models.Reminder
-    if err := DB.Preload("User").Preload("Exchange").Find(&reminders).Error; err != nil {
-        return nil, err
-    }
-    return reminders, nil
+	var reminders []models.Reminder
+	if err := DB.Preload("User").Preload("Exchange").Find(&reminders).Error; err != nil {
+		return nil, err
+	}
+	return reminders, nil
 }
 
-func DeleteReminder(reminder models.Reminder){
+func DeleteReminder(reminder models.Reminder) {
 	DB.Delete(reminder)
 }
-
-

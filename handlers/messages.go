@@ -1,7 +1,7 @@
 package handlers
 
 import (
-	"telegram-todolist/services"
+	"github.com/erfanwd/exchangeto/services"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 )

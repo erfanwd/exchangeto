@@ -2,7 +2,8 @@ package clients
 
 import (
 	"log"
-	"telegram-todolist/config"
+
+	"github.com/erfanwd/exchangeto/config"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 )
