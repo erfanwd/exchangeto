@@ -9,7 +9,7 @@ import (
 
 func CreateReminder(chat_id int64, userSelections map[string]interface{}) (*models.Reminder, error) {
 	// Get the user by chat ID
-	user, err := getUserByChatId(chat_id)
+	user, err := GetUserByChatId(chat_id)
 	if err != nil {
 		log.Println("Error fetching user:", err)
 		return nil, err
@@ -49,6 +49,14 @@ func CreateReminder(chat_id int64, userSelections map[string]interface{}) (*mode
 func GetAllReminders() ([]models.Reminder, error) {
 	var reminders []models.Reminder
 	if err := DB.Preload("User").Preload("Exchange").Find(&reminders).Error; err != nil {
+		return nil, err
+	}
+	return reminders, nil
+}
+
+func GetRemindersByUserId(user_id uint) ([]models.Reminder, error){
+	var reminders []models.Reminder
+	if err := DB.Where("user_id = ?", user_id).Preload("Exchange").Find(&reminders).Error; err != nil {
 		return nil, err
 	}
 	return reminders, nil

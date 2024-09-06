@@ -7,7 +7,8 @@ import (
 func CmdKeyboard() tgbotapi.ReplyKeyboardMarkup {
 	var cmdKeyboard = tgbotapi.NewOneTimeReplyKeyboard(
 		tgbotapi.NewKeyboardButtonRow(
-			tgbotapi.NewKeyboardButton("/set_reminder"),
+			tgbotapi.NewKeyboardButton("افزودن ریمایندر جدید"),
+			tgbotapi.NewKeyboardButton("لیست ریمایندر ها"),
 		),
 	)
 	return cmdKeyboard

@@ -3,7 +3,8 @@ package services
 import (
 	"log"
 	"strconv"
-
+	"strings"
+	"fmt"
 	"github.com/erfanwd/exchangeto/repositories"
 
 	// "github.com/erfanwd/exchangeto/repositories"
@@ -66,4 +67,24 @@ func SetAmount(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 	}
 	userStates[update.Message.Chat.ID] = "choosing_strategy"
 
+}
+
+func RemindersList (bot *tgbotapi.BotAPI, update tgbotapi.Update){
+	user, _ := repositories.GetUserByChatId(update.Message.Chat.ID)
+	reminders,_ := repositories.GetRemindersByUserId(user.ID)
+	var output []string
+	fmt.Println(reminders)
+	for _, reminder := range reminders {
+		output = append(output, fmt.Sprintf("استراتژی: %s, ارز: %s, مقدار تعیین شده: %d دلار", reminder.Strategy, reminder.Exchange.Name, reminder.Value))
+	}
+
+
+	result := strings.Join(output, "\n")
+
+	msg := tgbotapi.NewMessage(update.Message.Chat.ID, result)
+
+	if _, err := bot.Send(msg); err != nil {
+		log.Println("Error sending message:", err)
+		panic(err.Error()) // Consider handling this more gracefully
+	}
 }

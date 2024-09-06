@@ -24,7 +24,7 @@ func CreateUser(update tgbotapi.Update) (*models.User, error) {
 	return &user, nil
 }
 
-func getUserByChatId(chatId int64) (*models.User, error) {
+func GetUserByChatId(chatId int64) (*models.User, error) {
 	var user models.User
 	result := DB.Where("chat_id = ?", chatId).First(&user)
 	if result.Error != nil {

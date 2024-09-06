@@ -10,7 +10,5 @@ func Commands(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 	switch update.Message.Command() {
 	case "start":
 		services.StartChat(bot, update)
-	case "set_reminder":
-		services.ExchangeList(bot, update)
 	}
 }
