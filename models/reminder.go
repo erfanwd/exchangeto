@@ -14,3 +14,16 @@ type Reminder struct {
 }
 
 
+var strategyTranslations = map[string]string{
+	"higher":  "بالا تر از مقدار تعیین شده",
+	"lower": "پایین تر از مقدار تعیین شده",
+}
+
+func (r *Reminder) GetPersianStrategy() string {
+	if persianStrategy, ok := strategyTranslations[r.Strategy]; ok {
+		return persianStrategy
+	}
+	return r.Strategy 
+}
+
+
